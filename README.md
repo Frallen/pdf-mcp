@@ -2,12 +2,6 @@
 
 A Model Context Protocol (MCP) server that provides tools for reading and extracting text from PDF files, supporting both local files and URLs.
 
-## Author
-
-Philip Van de Walker  
-Email: philip.vandewalker@gmail.com  
-GitHub: https://github.com/trafflux
-
 ## Features
 
 - Read text content from local PDF files
@@ -22,14 +16,14 @@ GitHub: https://github.com/trafflux
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/trafflux/pdf-reader-mcp.git
-cd pdf-reader-mcp
+git clone http://github.com/Frallen/pdf-mcp
+cd pdf-mcp
 ```
 
 2. Build the Docker image:
 
 ```bash
-docker build -t mcp/pdf-reader .
+docker build -t mcp/pdf-mcp .
 ```
 
 ## Usage
@@ -39,7 +33,7 @@ docker build -t mcp/pdf-reader .
 To run the server with access to local PDF files:
 
 ```bash
-docker run -i --rm -v /path/to/pdfs:/pdfs mcp/pdf-reader
+docker run -i --rm -v /path/to/pdfs:/pdfs mcp/pdf-mcp
 ```
 
 Replace `/path/to/pdfs` with the actual path to your PDF files directory.
@@ -47,7 +41,7 @@ Replace `/path/to/pdfs` with the actual path to your PDF files directory.
 If not using local PDF files:
 
 ```bash
-docker run -i --rm mcp/pdf-reader
+docker run -i --rm mcp/pdf-mcp
 ```
 
 ### MCP Configuration
@@ -57,15 +51,15 @@ Add to your MCP settings configuration:
 ```json
 {
   "mcpServers": {
-    "pdf-reader": {
+    "pdf-mcp": {
       "command": "docker",
       "args": [
         "run",
         "-i",
         "--rm",
         "-v",
-        "/path/to/pdfs:/pdfs",
-        "mcp/pdf-reader"
+        "/path/to/pdfs",
+        "mcp/pdf-mcp"
       ],
       "disabled": false,
       "autoApprove": []
@@ -79,9 +73,9 @@ Without local file PDF files:
 ```json
 {
   "mcpServers": {
-    "pdf-reader": {
+    "pdf-mcp": {
       "command": "docker",
-      "args": ["run", "-i", "--rm", "mcp/pdf-reader"],
+      "args": ["run", "-i", "--rm", "mcp/pdf-mcp"],
       "disabled": false,
       "autoApprove": []
     }
@@ -165,30 +159,3 @@ Error responses follow the format:
     ├── __init__.py    # Package initialization
     └── server.py      # Main server implementation
 ```
-
-## License
-
-Copyright 2025 Philip Van de Walker
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Contact
-
-For questions, issues, or contributions, please contact Philip Van de Walker:
-
-- Email: philip.vandewalker@gmail.com
-- GitHub: https://github.com/trafflux

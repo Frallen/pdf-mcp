@@ -20,18 +20,9 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install git for MCP SDK installation
-RUN apt-get update && \
-    apt-get install -y git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install MCP SDK directly from GitHub repository
-RUN pip install git+https://github.com/modelcontextprotocol/python-sdk.git
-
-# Install project Python dependencies
+# Install project Python dependencies (mcp from PyPI; GitHub HEAD needs unpublished mcp-types)
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy source code into container
 COPY src/ .

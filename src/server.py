@@ -59,7 +59,13 @@ def extract_text_from_pdf(pdf_file) -> str:
         logger.error(f"Failed to extract text from PDF: {str(e)}")
         raise ValueError(f"Failed to extract text from PDF: {str(e)}")
 
-@mcp.tool()
+@mcp.tool(
+    annotations={
+        "readOnlyHint": True,
+        "idempotentHint": True,
+        "openWorldHint": False,
+    }
+)
 async def read_local_pdf(path: str) -> Dict[str, Any]:
     """Read text content from a local PDF file."""
     try:
@@ -84,7 +90,13 @@ async def read_local_pdf(path: str) -> Dict[str, Any]:
             "error": str(e)
         }
 
-@mcp.tool()
+@mcp.tool(
+    annotations={
+        "readOnlyHint": True,
+        "idempotentHint": True,
+        "openWorldHint": True,
+    }
+)
 async def read_pdf_url(url: str) -> Dict[str, Any]:
     """Read text content from a PDF URL."""
     try:
